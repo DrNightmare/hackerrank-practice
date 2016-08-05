@@ -14,13 +14,14 @@ void insertAtEnd(int x) {
 	temp -> data = x;
 	temp -> next = NULL;
 
-	// traverse to end of list
 	Node* temp1 = head;
 	if (temp1 == NULL) {
 		// first node
 		head = temp;
+		return;
 	}
 	else {
+	// traverse to end of list
 	while(temp1 -> next != NULL) {
 		temp1 = temp1 -> next;
 	}
@@ -84,6 +85,24 @@ void deleteAtP(int p) {
 	delete temp2;
 }
 
+// HEAD -> 1 -> 2 -> 3 -> NULL
+// NULL <- 1 <- 2 <- 3 <- HEAD
+Node* reverseList() {
+	Node *temp, *prev, *nextNode;
+	temp = head;
+	prev = NULL;
+
+	while(temp != NULL) {
+		nextNode = temp -> next;
+		temp -> next = prev;
+		prev = temp;
+		temp = nextNode;
+	}
+	head = prev;
+
+	return head;	
+}
+
 void printList() {
 	Node* temp = head;
 	while(temp != NULL) {
@@ -99,12 +118,12 @@ int main() {
 	int n, x, p;
 	cin >> n;
 	while(n--) {
-		cin >> x >> p;
-		insertAtP(x, p);
+		cin >> x;
+		insertAtEnd(x);
 	}
 
 	printList();
-	deleteAtP(2);
+	head = reverseList();
 	printList();
 
 	return 0;

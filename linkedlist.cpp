@@ -103,6 +103,21 @@ Node* reverseList() {
 	return head;	
 }
 
+bool isCycle() {
+	Node *slow, *fast;
+	slow = head;
+	fast = head;
+
+	while(slow -> next != NULL)  {
+		slow = slow -> next;
+		if(fast -> next == NULL || fast -> next -> next == NULL) return false;
+		fast = fast -> next -> next;
+
+		if (slow == fast) return true;
+	}
+	return false;
+}
+
 void printList() {
 	Node* temp = head;
 	while(temp != NULL) {
